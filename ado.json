@@ -6,6 +6,8 @@
     "tenantId":       "{{env `AZURE_TENANTID`}}",
     "cloud":          "{{env `AZURE_CLOUD`}}",
     "location":       "{{env `AZURE_LOCATION`}}"
+    "version":        "{{env `IMAGE_VERSION`}}"
+
   },
   "builders": [{
     "type":             "azure-arm",
@@ -18,7 +20,7 @@
     "location":                 "{{user `location`}}",
 
     "managed_image_resource_group_name": "Images", 
-    "managed_image_name": "myAdoAgent",
+    "managed_image_name": "myAdoAgent-{{user `version`}}",
     "os_type": "Linux",
     "image_publisher": "Canonical",
     "image_offer": "UbuntuServer",
