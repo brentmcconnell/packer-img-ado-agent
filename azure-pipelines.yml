@@ -1,0 +1,14 @@
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: |
+    packer build -force ado.json
+  displayName: 'Execute Packer script for sequencing'
+  env:
+    AZURE_CLOUD: $(AZURE_CLOUD)
+    AZURE_SECRET: $(AZURE_SECRET)
+    AZURE_CLIENTID: $(AZURE_CLIENTID)
+    AZURE_SUBSCRIPTIONID: $(AZURE_SUBSCRIPTIONID)
+    AZURE_TENANTID: $(AZURE_TENANTID)
+    AZURE_LOCATION: $(AZURE_LOCATION)

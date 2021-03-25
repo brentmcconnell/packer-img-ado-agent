@@ -1,0 +1,65 @@
+{
+  "variables": {
+    "secretKey":      "{{env `AZURE_SECRET`}}",
+    "clientId":       "{{env `AZURE_CLIENTID`}}",
+    "subscriptionId": "{{env `AZURE_SUBSCRIPTIONID`}}",
+    "tenantId":       "{{env `AZURE_TENANTID`}}",
+    "cloud":          "{{env `AZURE_CLOUD`}}",
+    "location":       "{{env `AZURE_LOCATION`}}"
+  },
+  "builders": [{
+    "type":             "azure-arm",
+
+    "subscription_id":          "{{user `subscriptionId`}}",
+    "client_id":                "{{user `clientId`}}",
+    "client_secret":            "{{user `secretKey`}}",
+    "tenant_id":                "{{user `tenantId`}}",
+    "cloud_environment_name":   "{{user `cloud`}}",
+    "location":                 "{{user `location`}}",
+
+    "managed_image_resource_group_name": "Images", 
+    "managed_image_name": "myAdoAgent",
+    "os_type": "Linux",
+    "image_publisher": "Canonical",
+    "image_offer": "UbuntuServer",
+    "image_sku": "18.04-LTS",
+
+    "azure_tags": {
+        "os": "linux",
+        "type": "ubuntu",
+        "task": "image deployment",
+        "created_by": "packer"
+    },
+
+    "vm_size": "Standard_DS2_v2"
+  }],
+  "provisioners": [{
+    "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
+    "inline": [
+      "apt-get update",
+      "apt-get -y install docker.io curl apt-transport-https lsb-release gpg jq",
+      "apt-get -y install software-properties-common",
+      "curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >> /etc/apt/trusted.gpg.d/microsoft.asc.gpg",
+      "echo 'deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ bionic main' >> /etc/apt/sources.list.d/azure-cli.list",
+      "curl -sLO https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb && dpkg -i packages-microsoft-prod.deb",
+      "curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -",
+      "curl -s https://apt.releases.hashicorp.com/gpg | sudo apt-key add -",
+      "apt-add-repository 'deb [arch=amd64] https://apt.releases.hashicorp.com bionic main'",
+      "apt-add-repository --yes --update ppa:ansible/ansible",
+      "echo 'deb https://apt.kubernetes.io/ kubernetes-xenial main' >> /etc/apt/sources.list.d/kubernetes.list",
+      "apt-get update",
+      "apt-get -y install openjdk-8-jdk-headless azure-cli maven git",
+      "apt-get -y install apt-transport-https",
+      "apt-get -y install kubectl",
+      "apt-get -y install terraform",
+      "apt-get -y install packer",
+      "apt-get -y install powershell",
+      "apt-get -y install ansible",
+      "systemctl enable docker",
+      "pwsh -c 'Install-Module -Name Az -AllowClobber -SkipPublisherCheck -Force -Confirm:$False'",
+      "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
+    ],
+    "inline_shebang": "/bin/sh -x",
+    "type": "shell"
+  }]
+}
