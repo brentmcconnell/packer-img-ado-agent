@@ -5,7 +5,7 @@
     "subscriptionId": "{{env `AZURE_SUBSCRIPTIONID`}}",
     "tenantId":       "{{env `AZURE_TENANTID`}}",
     "cloud":          "{{env `AZURE_CLOUD`}}",
-    "location":       "{{env `AZURE_LOCATION`}}"
+    "location":       "{{env `AZURE_LOCATION`}}",
     "version":        "{{env `IMAGE_VERSION`}}"
 
   },
