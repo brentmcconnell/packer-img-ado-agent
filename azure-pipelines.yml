@@ -3,6 +3,12 @@ pool:
 
 steps:
 - script: |
+    GIT_COMMIT=$( git rev-parse --short HEAD )
+    echo "##vso[task.setvariable variable=GIT_COMMIT;isOutput=true]$GIT_COMMIT"
+  name: runtime_vars
+  displayName: 'Set runtime variables for pipeline'
+
+- script: |
     packer build -force ado.json
   displayName: 'Execute Packer script for sequencing'
   env:
@@ -12,3 +18,4 @@ steps:
     AZURE_SUBSCRIPTIONID: $(AZURE_SUBSCRIPTIONID)
     AZURE_TENANTID: $(AZURE_TENANTID)
     AZURE_LOCATION: $(AZURE_LOCATION)
+    IMAGE_VERSION: $(runtime_vars.GIT_COMMIT)
