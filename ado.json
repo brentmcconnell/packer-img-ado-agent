@@ -18,7 +18,7 @@
     "cloud_environment_name":             "{{user `cloud`}}",
     "build_resource_group_name":          "{{user `resourceGroup`}}",
     "managed_image_resource_group_name":  "{{user `resourceGroup`}}", 
-    "managed_image_name":                 "myAdoAgent-{{user `version`}}",
+    "managed_image_name":                 "myAdoAgentImg-{{user `version`}}",
     "os_type":                            "Linux",
     "image_publisher":                    "Canonical",
     "image_offer":                        "UbuntuServer",
