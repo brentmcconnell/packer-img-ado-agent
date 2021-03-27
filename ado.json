@@ -6,7 +6,7 @@
     "tenantId":       "{{env `AZURE_TENANTID`}}",
     "cloud":          "{{env `AZURE_CLOUD`}}",
     "location":       "{{env `AZURE_LOCATION`}}",
-    "resourceGroup":  "{{env `RESOURCE_GROUP`}}"
+    "resourceGroup":  "{{env `RESOURCE_GROUP`}}",
     "version":        "{{env `IMAGE_VERSION`}}"
   },
   "builders": [{
@@ -17,7 +17,7 @@
     "tenant_id":                          "{{user `tenantId`}}",
     "cloud_environment_name":             "{{user `cloud`}}",
     "build_resource_group_name":          "{{user `resourceGroup`}}",
-    "managed_image_resource_group_name":  "Images", 
+    "managed_image_resource_group_name":  "{{user `resourceGroup`}}", 
     "managed_image_name":                 "myAdoAgent-{{user `version`}}",
     "os_type":                            "Linux",
     "image_publisher":                    "Canonical",
