@@ -2,7 +2,7 @@ pool:
   vmImage: ubuntu-latest
   
 variables:
-- group: PROJECT-5058
+- group: SP_VALUES
 
 steps:
 - script: |
