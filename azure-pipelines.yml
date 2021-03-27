@@ -1,5 +1,8 @@
 pool:
   vmImage: ubuntu-latest
+  
+variables:
+- group: PROJECT-5058
 
 steps:
 - script: |
