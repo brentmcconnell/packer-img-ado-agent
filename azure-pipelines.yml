@@ -16,10 +16,10 @@ steps:
   displayName: 'Execute Packer script for sequencing'
   env:
     AZURE_CLOUD: $(AZURE_CLOUD)
-    AZURE_SECRET: $(sp-password-tf-5058)
-    AZURE_CLIENTID: $(sp-client-id-tf-5058)
-    AZURE_SUBSCRIPTIONID: $(sp-subscription-id-tf-5058)
-    AZURE_TENANTID: $(sp-tenant-id-tf-5058)
+    AZURE_SECRET: $(SP-PASSWORD)
+    AZURE_CLIENTID: $(SP-CLIENTID)
+    AZURE_SUBSCRIPTIONID: $(SP-SUBSCRIPTIONID)
+    AZURE_TENANTID: $(SP-TENANTID)
     AZURE_LOCATION: $(AZURE_LOCATION)
     AZURE_RESOURCE_GROUP: $(AZURE_RESOURCE_GROUP)
     IMAGE_VERSION: $(runtime_vars.GIT_COMMIT)
