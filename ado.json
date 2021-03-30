@@ -1,6 +1,6 @@
 {
   "variables": {
-    "secretKey":      "{{env `AZURE_SECRET`}}",
+    "secretKey":      "{{env `AZURE_PASSWORD`}}",
     "clientId":       "{{env `AZURE_CLIENTID`}}",
     "subscriptionId": "{{env `AZURE_SUBSCRIPTIONID`}}",
     "tenantId":       "{{env `AZURE_TENANTID`}}",
