@@ -16,7 +16,7 @@ steps:
   displayName: 'Execute Packer script for sequencing'
   env:
     AZURE_CLOUD: $(AZURE_CLOUD)
-    AZURE_SECRET: $(SP-PASSWORD)
+    AZURE_PASSWORD: $(SP-PASSWORD)
     AZURE_CLIENTID: $(SP-CLIENTID)
     AZURE_SUBSCRIPTIONID: $(SP-SUBSCRIPTIONID)
     AZURE_TENANTID: $(SP-TENANTID)
