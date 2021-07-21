@@ -37,7 +37,7 @@
     "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
     "inline": [
       "apt-get update",
-      "apt-get -y install docker.io curl apt-transport-https lsb-release gpg jq",
+      "apt-get -y install docker.io curl apt-transport-https lsb-release gpg",
       "apt-get -y install software-properties-common",
       "curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >> /etc/apt/trusted.gpg.d/microsoft.asc.gpg",
       "echo 'deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ bionic main' >> /etc/apt/sources.list.d/azure-cli.list",
@@ -47,6 +47,8 @@
       "apt-add-repository 'deb [arch=amd64] https://apt.releases.hashicorp.com bionic main'",
       "apt-add-repository --yes --update ppa:ansible/ansible",
       "echo 'deb https://apt.kubernetes.io/ kubernetes-xenial main' >> /etc/apt/sources.list.d/kubernetes.list",
+      "curl -sL https://github.com/docker/compose-cli/releases/download/v1.0.14/docker-linux-amd64.tar.gz | tar xfz - -C /usr/local/bin --strip-components=1 docker/docker docker/docker-compose",
+      "ln -s /usr/local/bin/docker /usr/local/bin/com.docker.cli",
       "apt-get update",
       "apt-get -y install openjdk-8-jdk-headless azure-cli maven git",
       "apt-get -y install apt-transport-https",
@@ -55,6 +57,7 @@
       "apt-get -y install packer",
       "apt-get -y install powershell",
       "apt-get -y install ansible",
+      "apt-get -y install jq",
       "systemctl enable docker",
       "pwsh -c 'Install-Module -Name Az -AllowClobber -SkipPublisherCheck -Force -Confirm:$False'",
       "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
